@@ -4,4 +4,4 @@
   <img src="/images/Logo - Dark.png" />
 </p>
 
-> 🚧 This project is a work in progress...\
+> 🚧 This project is a work in progress...

@@ -17,6 +17,8 @@ module.exports = {
           '900': '#076042',
           '950': '#003724',
         },
+        Darkbg: '#151517',
+        Lightbg: '#EDFFF8'
       },
       fontSize: {
         '2xs': '0.625rem',
