@@ -2,6 +2,10 @@
 module.exports = {
   content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    screens: {
+      'md': '430px',
+      'lg': '900px',
+    },
     extend: {
       colors: {
         'spring': {
@@ -21,11 +25,21 @@ module.exports = {
         Lightbg: '#EDFFF8'
       },
       fontSize: {
-        '2xs': '0.625rem',
-        '3xs': '0.5rem',
-        '4xs': '0.375rem',
+        '2xs': '10px',
+        '3xs': '8px',
+        '4xs': '6px',
+      },
+      fontFamily: {
+        'lexend': ['LexendRegular'],
+        'lexend-medium': ['LexendMedium'],
+        'lexend-bold': ['LexendBold'],
+        'lexend-extrabold': ['LexendExtraBold'],
+        'lexend-black': ['LexendBlack'],
+        'lexend-light': ['LexendLight'],
+        'lexend-extralight': ['LexendExtraLight'],
+        'lexend-thin': ['LexendThin'],
       }
-    },
+   },
   },
   plugins: [],
 }

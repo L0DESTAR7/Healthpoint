@@ -1,5 +1,6 @@
 import { useColorScheme } from "nativewind";
 import { Switch } from "react-native";
+import isDark from "../util/isDark";
 
 
 export default function ThemeSwitch() {
@@ -8,6 +9,6 @@ export default function ThemeSwitch() {
   console.log("[ThemeSwitch.tsx]: " + theme);
 
   return (
-    <Switch onChange={toggleTheme} value={theme === 'dark'}></Switch>
+    <Switch onChange={toggleTheme} value={isDark(theme)}></Switch>
   )
 }
