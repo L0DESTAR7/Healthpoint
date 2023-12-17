@@ -1,19 +1,18 @@
-import Diabetes from "./screens/Diabetes";
-import Food from "./screens/Food";
-import Hydration from "./screens/Hydration";
-import Exercice from "./screens/Exercice";
-import Reminders from "./screens/Reminders";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import bottomTabBarStyle from "./styles/bottomTabBarStyle";
+import isDark from "../util/isDark";
 import { useColorScheme } from "nativewind";
-import isDark from "./util/isDark";
-import bottomTabBarStyleDark from "./styles/bottomTabBarStyleDark";
-import TabButton from "./components/TabButton";
+import Diabetes from "../screens/Diabetes";
+import TabButton from "../components/TabButton";
+import Food from "../screens/Food";
+import Hydration from "../screens/Hydration";
+import Exercice from "../screens/Exercice";
+import Reminders from "../screens/Reminders";
+import bottomTabBarStyleDark from "../styles/BottomTabBarStyleDark";
+import bottomTabBarStyle from "../styles/BottomTabBarStyle";
 
 const Tabs = createBottomTabNavigator();
-// TODO: Add Drawer
 
-export default function Navigations() {
+export default function TabNavigator() {
 
   const { colorScheme: theme } = useColorScheme();
 

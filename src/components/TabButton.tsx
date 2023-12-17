@@ -5,7 +5,7 @@ import IconProvider from "./IconProvider";
 export default function TabButton(props: BottomTabBarButtonProps) {
 
   const isActive = props.accessibilityState?.selected ?? false;
-  const label = props.to?.replace("/", "") ?? "Diabetes";
+  const label = props.to?.replace("/Home/", "") ?? "Diabetes";
 
   return (
     <TouchableOpacity onPress={props.onPress} className="flex flex-row justify-center items-center px-3 md:px-4 lg:px-6 lg:mx-8">

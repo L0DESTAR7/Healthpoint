@@ -1,5 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';
-import Navigations from './src/Navigations';
+import 'react-native-gesture-handler';
+import Navigations from './src/Navigation';
 import { Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 
@@ -14,6 +14,7 @@ export default function App() {
     'LexendRegular': require('./assets/fonts/Lexend/Lexend-Regular.ttf'),
     'LexendMedium': require('./assets/fonts/Lexend/Lexend-Medium.ttf'),
     'LexendBold': require('./assets/fonts/Lexend/Lexend-Bold.ttf'),
+    'LexendSemiBold': require('./assets/fonts/Lexend/Lexend-SemiBold.ttf'),
     'LexendExtraBold': require('./assets/fonts/Lexend/Lexend-ExtraBold.ttf'),
     'LexendBlack': require('./assets/fonts/Lexend/Lexend-Black.ttf'),
   });
@@ -22,9 +23,9 @@ export default function App() {
   //       style every text with font-lexend... Instead have it 
   //       apply font-lexend (regular) by default.
 
+  if (!fontsLoaded) return null;
+
   return (
-    <NavigationContainer>
-      <Navigations />
-    </NavigationContainer>
+    <Navigations />
   );
 }
