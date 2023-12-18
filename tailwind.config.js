@@ -39,7 +39,10 @@ module.exports = {
         'lexend-light': ['LexendLight'],
         'lexend-extralight': ['LexendExtraLight'],
         'lexend-thin': ['LexendThin'],
-      }
+      },
+      borderRadius: {
+        "card": "32px"
+      },
    },
   },
   plugins: [],

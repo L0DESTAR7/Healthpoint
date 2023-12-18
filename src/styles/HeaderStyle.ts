@@ -16,7 +16,7 @@ const headerStyle: Animated.WithAnimatedValue<StyledProps<ViewStyle>> =
     :
     formFactor === "md" ?
       {
-        height: 96,
+        height: 64,
         elevation: 0,
         borderBottomWidth: 0,
         shadowOpacity: 0,
@@ -24,7 +24,7 @@ const headerStyle: Animated.WithAnimatedValue<StyledProps<ViewStyle>> =
       }
       :
       {
-        height: 80,
+        height: 56,
         elevation: 0,
         borderBottomWidth: 0,
         shadowOpacity: 0,
