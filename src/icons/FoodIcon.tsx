@@ -1,5 +1,4 @@
 import { styled } from "nativewind";
-import { Dimensions } from "react-native";
 import { Path, Svg } from "react-native-svg";
 import getFormFactor from "../util/getFormFactor";
 import { IconProps } from "../types/IconProps";
