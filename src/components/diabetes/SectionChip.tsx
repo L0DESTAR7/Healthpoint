@@ -1,6 +1,7 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import SectionChipProps from "../../types/SectionChipProps";
 import { LinearGradient } from "expo-linear-gradient";
+import LexendText from "../LexendText";
 
 export default function SectionChip(props: SectionChipProps) {
 
@@ -13,12 +14,16 @@ export default function SectionChip(props: SectionChipProps) {
         <LinearGradient colors={['#2BFDB1', "#06754E"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
           className="flex flex-row items-center justify-center w-full h-full rounded-full"
         >
-          <Text className="font-lexend leading-[0rem] text-lg md:text-xl lg:text-4xl text-spring-950">{label}</Text>
+          <LexendText class="leading-[0rem] text-lg md:text-xl lg:text-4xl text-spring-950">
+            {label}
+          </LexendText>
         </LinearGradient>
         :
         <View className="flex flex-row items-center justify-center w-full h-full rounded-full
           border-2 border-spring-300">
-          <Text className="font-lexend leading-[0rem] text-lg md:text-xl lg:text-4xl text-spring-300">{label}</Text>
+          <LexendText class="leading-[0rem] text-lg md:text-xl lg:text-4xl text-spring-300">
+            {label}
+          </LexendText>
         </View>
       }
     </View>
