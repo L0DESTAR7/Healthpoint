@@ -1,4 +1,5 @@
 export type IconProps = {
   label?: string,
-  isActive: boolean
+  class?: string,
+  isActive: boolean,
 }
