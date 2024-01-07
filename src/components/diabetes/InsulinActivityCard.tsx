@@ -6,6 +6,8 @@ import { useColorScheme } from "nativewind";
 import isDark from "../../util/isDark";
 import BasalIcon from "../../icons/BasalIcon";
 import FastIcon from "../../icons/FastIcon";
+import { useAtom } from "jotai";
+import latestInsulinLogAtom from "../../atoms/latestInsulinLogAtom";
 
 export default function InsulinActivityCard() {
 
@@ -13,6 +15,9 @@ export default function InsulinActivityCard() {
   const { colorScheme: theme } = useColorScheme();
   const darkColors = ["#AEFFE2", "#2BFDB1"];
   const lightColors = ["#009660", "#2BFDB1"];
+
+  // State
+  const [latestInsulinLog] = useAtom(latestInsulinLogAtom);
 
   return (
     <LinearGradient className="flex flex-row w-full h-[50px] items-center rounded-md md:rounded-lg md:h-14 lg:h-20 lg:rounded-xl px-2 md:px-3"
@@ -24,8 +29,10 @@ export default function InsulinActivityCard() {
         <View className="flex flex-col justify-start mt-[1px] md:mt-[2px] lg:mt-1">
           <View className="flex flex-row items-center">
             {
-              // TODO: Check Insulin type to determine which Icon to use.
-              <FastIcon isActive={false} class="mr-2"></FastIcon>
+              latestInsulinLog.type === "basal" ?
+                <BasalIcon isActive={false} class="mr-2"></BasalIcon>
+                :
+                <FastIcon isActive={false} class="mr-2"></FastIcon>
             }
             <LexendText class="text-spring-950 text-lg md:text-xl lg:text-3xl">
               20
