@@ -15,7 +15,7 @@ export default function GlucoseActivityCard() {
   const [latestGlucoseLog] = useAtom(latestGlucoseLogAtom);
 
   return (
-    <LinearGradient className="flex flex-row w-full h-[50px] items-center rounded-md md:rounded-lg md:h-14 lg:h-20 lg:rounded-xl px-2 md:px-3"
+    <LinearGradient className="flex flex-row w-full h-12 items-center rounded-md md:rounded-lg md:h-12 lg:h-20 lg:rounded-xl px-2 md:px-3"
       colors={["#2BFDB1", "#00C076"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
       <View className="flex flex-row w-full h-[95%] justify-between">
         <LexendText class="text-spring-950 text-lg md:mt-0.5 md:text-xl lg:mt-1 lg:text-3xl">
