@@ -4,11 +4,16 @@ import isDark from "../../util/isDark";
 import { View } from "react-native";
 import LexendText from "../LexendText";
 import FastIcon from "../../icons/FastIcon";
+import { useAtom } from "jotai";
+import totalDailyFastAtom from "../../atoms/totalDailyFastAtom";
 
 
 export default function TotalFastCard() {
 
   const { colorScheme: theme } = useColorScheme();
+
+  //State
+  const [totalDailyFast] = useAtom(totalDailyFastAtom);
 
   return (
     <LinearGradient className="w-16 h-[64px] md:h-[66px] lg:w-[86px] lg:h-24 rounded-lg"
@@ -29,7 +34,7 @@ export default function TotalFastCard() {
         </LexendText>
         <FastIcon isActive={false}></FastIcon>
         <LexendText class="text-spring-950 lg:text-2xl">
-          14
+          {totalDailyFast}
         </LexendText>
       </View>
     </LinearGradient>

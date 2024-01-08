@@ -2,9 +2,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import { View } from "react-native";
 import LexendText from "../LexendText";
 import BasalIcon from "../../icons/BasalIcon";
+import { useAtom } from "jotai";
+import totalDailyBasalAtom from "../../atoms/totalDailyBasalAtom";
 
 
 export default function TotalBasalCard() {
+
+  // State 
+  const [totalDailyBasal] = useAtom(totalDailyBasalAtom);
 
   return (
     <LinearGradient className="w-16 h-[64px] md:h-[66px] lg:w-[86px] lg:h-24 rounded-lg"
@@ -20,7 +25,7 @@ export default function TotalBasalCard() {
         </LexendText>
         <BasalIcon isActive={true}></BasalIcon>
         <LexendText class="text-spring-50 lg:text-2xl">
-          20
+          {totalDailyBasal}
         </LexendText>
       </View>
     </LinearGradient>

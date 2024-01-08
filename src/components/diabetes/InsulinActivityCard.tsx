@@ -35,13 +35,13 @@ export default function InsulinActivityCard() {
                 <FastIcon isActive={false} class="mr-2"></FastIcon>
             }
             <LexendText class="text-spring-950 text-lg md:text-xl lg:text-3xl">
-              20
+              {latestInsulinLog.value}
             </LexendText>
           </View>
           <Text className="font-lexend text-spring-950 text-xs md:text-md md:mb-1.5 lg:text-xl self-end"
             style={formFactor === "lg" ? { lineHeight: 20 } : { lineHeight: 13 }}
           >
-            Unit
+            {latestInsulinLog.unit}
           </Text>
         </View>
       </View>
