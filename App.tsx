@@ -2,6 +2,8 @@ import 'react-native-gesture-handler';
 import Navigations from './src/Navigation';
 import { Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
+import { PaperProvider } from 'react-native-paper';
+import { en, registerTranslation } from 'react-native-paper-dates';
 
 export default function App() {
 
@@ -19,13 +21,13 @@ export default function App() {
     'LexendBlack': require('./assets/fonts/Lexend/Lexend-Black.ttf'),
   });
 
-  // TODO: Implement a Text Component wrapper to avoid having to 
-  //       style every text with font-lexend... Instead have it 
-  //       apply font-lexend (regular) by default.
+  registerTranslation('en', en);
 
   if (!fontsLoaded) return null;
 
   return (
-    <Navigations />
+    <PaperProvider>
+      <Navigations />
+    </PaperProvider>
   );
 }

@@ -9,7 +9,7 @@ const StyledPath = styled(Path, { classProps: ["fill", "stroke"] })
 function FastSVG({ fill, ...props }: any) {
 
   const formFactor = getFormFactor();
-  console.log("[HydrationIcon.tsx]: formFactor = " + formFactor);
+  console.log("[FastIcon.tsx]: formFactor = " + formFactor);
 
   return (
     <Svg

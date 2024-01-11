@@ -9,7 +9,7 @@ const StyledPath = styled(Path, { classProps: ["fill", "stroke"] })
 function BasalSVG({ fill, ...props }: any) {
 
   const formFactor = getFormFactor();
-  console.log("[HydrationIcon.tsx]: formFactor = " + formFactor);
+  console.log("[BasalSVG.tsx]: formFactor = " + formFactor);
 
   return (
     <Svg
@@ -27,10 +27,13 @@ export default function BasalIcon(props: IconProps) {
   return (
     <View className={props.class}>
       <BasalSVG fill={
-        props.isActive ?
-          "fill-spring-50"
+        !props.overrideDefaultFill ?
+          props.isActive ?
+            "fill-spring-50"
+            :
+            "fill-spring-950"
           :
-          "fill-spring-950"
+          `${props.overrideDefaultFill}`
       }>
       </BasalSVG>
     </View>

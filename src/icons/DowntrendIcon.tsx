@@ -9,7 +9,7 @@ const StyledPath = styled(Path, { classProps: ["fill", "stroke"] })
 function DowntrendSVG({ fill, ...props }: any) {
 
   const formFactor = getFormFactor();
-  console.log("[HydrationIcon.tsx]: formFactor = " + formFactor);
+  console.log("[DowntrendIcon.tsx]: formFactor = " + formFactor);
 
   return (
     <Svg
