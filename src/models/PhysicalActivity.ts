@@ -1,5 +1,6 @@
 import { Decimal128 } from "mongodb";
 import { BSON, ObjectSchema } from "realm";
+import { User } from "./User";
 
 export class PhysicalActivity extends Realm.Object<PhysicalActivity> {
 
@@ -8,6 +9,7 @@ export class PhysicalActivity extends Realm.Object<PhysicalActivity> {
     activity!: string;
     duration!: Decimal128;
     intensity!: string;
+    User!: User
 
     static schema: ObjectSchema = {
         name: 'PhysicalActivity',
@@ -21,7 +23,7 @@ export class PhysicalActivity extends Realm.Object<PhysicalActivity> {
             User: {
                 type: 'linkingObjects',
                 objectType: 'User',
-                property: 'User'
+                property: 'PhysicalActivity'
             }
         },
 

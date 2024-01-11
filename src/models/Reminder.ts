@@ -1,5 +1,6 @@
 import { Decimal128 } from "mongodb";
 import { BSON, ObjectSchema } from "realm";
+import { User } from "./User";
 
 export class Reminder extends Realm.Object<Reminder> {
 
@@ -7,6 +8,7 @@ export class Reminder extends Realm.Object<Reminder> {
     date!: Date;
     value!: Decimal128;
     periodcity!: string;
+    User!: User
 
     static schema: ObjectSchema = {
         name: 'Reminder',
@@ -19,7 +21,7 @@ export class Reminder extends Realm.Object<Reminder> {
             User: {
                 type: 'linkingObjects',
                 objectType: 'User',
-                property: 'User'
+                property: 'Reminders'
             }
         },
 

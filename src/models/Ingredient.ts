@@ -13,9 +13,9 @@ export class Ingredient extends Realm.Object {
         properties: {
             _id: 'objectId',
             name: 'string',
-            protein: 'Decimal128',
-            fat: 'Decimal128',
-            calories: 'Decimal128'
+            protein: 'decimal128',
+            fat: 'decimal128',
+            calories: 'decimal128'
         },
         primaryKey: '_id'
     }

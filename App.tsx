@@ -1,12 +1,27 @@
 import 'react-native-gesture-handler';
 import Navigations from './src/Navigation';
-import { Dimensions } from 'react-native';
+import { Dimensions, Pressable, View, Text } from 'react-native';
 import { useFonts } from 'expo-font';
+import { mainRealmContext } from './src/contexts/MainRealmContext';
+import { AppProvider, UserProvider, useAuth } from '@realm/react';
 
 export default function App() {
 
   const dim = Dimensions.get('screen');
   console.log("[App.tsx]: " + dim.width + "x" + dim.height);
+  const { RealmProvider: MainRealmProvider, useRealm: useMainRealm, useQuery: useMainQuery, useObject: useMainObject } = mainRealmContext;
+  const LoginComponent = () => {
+    // Calling `useAuth()` requires AppProvider to be a parent
+    const { logInWithAnonymous, result } = useAuth();
+    return (
+      <View>
+        <Pressable onPress={logInWithAnonymous}>
+          <Text>Log In</Text>
+        </Pressable>
+        {result.error && <Text>{result.error.message}</Text>}
+      </View>
+    );
+  };
   const [fontsLoaded] = useFonts({
     'LexendThin': require('./assets/fonts/Lexend/Lexend-Thin.ttf'),
     'LexendExtraLight': require('./assets/fonts/Lexend/Lexend-ExtraLight.ttf'),
@@ -26,6 +41,27 @@ export default function App() {
   if (!fontsLoaded) return null;
 
   return (
-    <Navigations />
+    <AppProvider id="devicesync-ynnpt">
+      <UserProvider fallback={LoginComponent}>
+        <MainRealmProvider sync={{
+            flexible: true,
+            initialSubscriptions: {
+              update(subs, realm) {
+                subs.add(realm.objects('User'))
+                subs.add(realm.objects('Glucose'))
+                subs.add(realm.objects('Hydration'))
+                subs.add(realm.objects('Reminder'))
+                subs.add(realm.objects('PhysicalActivity'))
+                subs.add(realm.objects('Insuline'))
+                subs.add(realm.objects('Ingredient'))
+              },
+              rerunOnOpen: true
+            },
+          }}>
+         <Navigations />
+        </MainRealmProvider>
+      </UserProvider>
+    </AppProvider>
   );
 }
+

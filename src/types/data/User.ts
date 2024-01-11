@@ -1,5 +1,6 @@
 export type User = {
-  name: string,
+  firstName: string,
+  lastName: string,
   age: number,
-  diabetesType: string,
+  diabetesType?: string,
 }
