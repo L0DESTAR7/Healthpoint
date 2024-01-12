@@ -4,8 +4,8 @@ import isDark from "../../util/isDark";
 import { View } from "react-native";
 import LexendText from "../LexendText";
 import FastIcon from "../../icons/FastIcon";
-import { useAtom } from "jotai";
-import totalDailyFastAtom from "../../atoms/totalDailyFastAtom";
+import { MainRealmContext } from "../../contexts/MainRealmContext";
+import { Insulin } from "../../models/Insulin";
 
 
 export default function TotalFastCard() {
@@ -13,7 +13,23 @@ export default function TotalFastCard() {
   const { colorScheme: theme } = useColorScheme();
 
   //State
-  const [totalDailyFast] = useAtom(totalDailyFastAtom);
+
+  const today = new Date();
+  today.setHours(0);
+  today.setMinutes(0);
+  let tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+
+  const results = MainRealmContext.useQuery(
+    Insulin,
+    (collection) => {
+      return collection
+        .filtered("date <= $0 && date >= $1", tomorrow, today)
+        .filtered("type == $0", "fast")
+    }
+  )
+
+  const totalDailyFast = results.sum("value") ?? 0;
 
   return (
     <LinearGradient className="w-16 h-[64px] md:h-[66px] lg:w-[86px] lg:h-24 rounded-lg"

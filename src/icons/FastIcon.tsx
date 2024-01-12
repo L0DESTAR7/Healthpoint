@@ -27,10 +27,12 @@ export default function FastIcon(props: IconProps) {
   return (
     <View className={props.class}>
       <FastSVG fill={
-        props.isActive ?
-          "fill-spring-200 dark:fill-Darkbg"
-          :
-          "fill-spring-950"
+        !props.overrideDefaultFill ?
+          props.isActive ?
+            "fill-spring-200 dark:fill-Darkbg"
+            :
+            "fill-spring-950"
+          : `${props.overrideDefaultFill}`
       }>
       </FastSVG>
     </View>

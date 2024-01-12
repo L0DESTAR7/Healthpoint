@@ -4,6 +4,9 @@ import { Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { PaperProvider } from 'react-native-paper';
 import { en, registerTranslation } from 'react-native-paper-dates';
+import { AppProvider, UserProvider } from '@realm/react';
+import LoginComponent from './src/components/LoginComponent';
+import { MainRealmContext } from './src/contexts/MainRealmContext';
 
 export default function App() {
 
@@ -25,9 +28,36 @@ export default function App() {
 
   if (!fontsLoaded) return null;
 
+  const {
+    RealmProvider: MainRealmProvider,
+    useRealm: useMainRealm,
+    useQuery: useMainQuery,
+    useObject: useMainObject } = MainRealmContext;
   return (
-    <PaperProvider>
-      <Navigations />
-    </PaperProvider>
+    <AppProvider id={"devicesync-ynnpt"}>
+      <UserProvider fallback={LoginComponent}>
+        <MainRealmProvider
+          sync={{
+            flexible: true,
+            initialSubscriptions: {
+              update(subs: any, realm: any) {
+                subs.add(realm.objects('User'))
+                subs.add(realm.objects('Glucose'))
+                subs.add(realm.objects('Hydration'))
+                subs.add(realm.objects('Reminder'))
+                subs.add(realm.objects('PhysicalActivity'))
+                subs.add(realm.objects('Insulin'))
+                subs.add(realm.objects('Ingredient'))
+              },
+              rerunOnOpen: true
+            },
+          }}
+        >
+          <PaperProvider>
+            <Navigations />
+          </PaperProvider>
+        </MainRealmProvider>
+      </UserProvider>
+    </AppProvider>
   );
 }

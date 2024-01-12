@@ -7,6 +7,7 @@ import { useCallback } from "react";
 import insulinLogAtom from "../../atoms/forms/insulin/insulinLogAtom";
 import isDark from "../../util/isDark";
 import { useColorScheme } from "nativewind";
+import FastIcon from "../../icons/FastIcon";
 
 
 export default function InsulinTypeMenu() {
@@ -92,7 +93,7 @@ export default function InsulinTypeMenu() {
         }
         onPress={onSelectFast}
       >
-        <BasalIcon isActive={false}
+        <FastIcon isActive={false}
           overrideDefaultFill={
             insulinType === "fast" ? // Selected ?
               "fill-spring-200 dark:fill-zinc-800"

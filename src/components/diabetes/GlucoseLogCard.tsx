@@ -12,6 +12,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { createRef } from "react";
 import GlucoseDateTimePicker from "../GlucoseDateTimePicker";
 import glucoseDateTimeAtom from "../../atoms/forms/glucose/glucoseDateTimeAtom";
+import { MainRealmContext } from "../../contexts/MainRealmContext";
+import { BSON } from "realm";
 
 
 export default function GlucoseLogCard() {
@@ -22,6 +24,7 @@ export default function GlucoseLogCard() {
   // State 
   const [glucoseLog, setGlucoseLog] = useAtom(GlucoseLogAtom);
   const [glucoseUnitMenuVisibility, setGlucoseUnitMenuVisibility] = useAtom(glucoseUnitAtom);
+  const realm = MainRealmContext.useRealm();
   const dateTime = useAtomValue(glucoseDateTimeAtom);
   const closeUnitMenu = () => {
     setGlucoseUnitMenuVisibility(false);
@@ -33,6 +36,16 @@ export default function GlucoseLogCard() {
     setGlucoseLog({ value: glucoseLog.value, date: dateTime, unit: glucoseLog.unit });
     glucoseInput.current?.clear();
     // TODO: Write Glucose Log to the DB
+    realm.write(() => {
+      realm.create("Glucose",
+        {
+          _id: new BSON.ObjectId(),
+          value: glucoseLog.value,
+          date: glucoseLog.date,
+          unit: glucoseLog.unit,
+        }
+      );
+    })
     console.log(JSON.stringify(glucoseLog));
   }
   const glucoseInput = createRef<TextInput>();
@@ -61,7 +74,7 @@ export default function GlucoseLogCard() {
                     maxLength={3}
                     textAlign="center"
                     ref={glucoseInput}
-                    onChangeText={(value: string) => setGlucoseLog({ ...glucoseLog, value: Number(value) })}
+                    onChangeText={(value: string) => setGlucoseLog({ unit: glucoseLog.unit, date: glucoseLog.date, value: Number(value) })}
                     className="font-lexend-medium text-spring-800 dark:text-spring-200 md:text-lg lg:text-2xl"
                   >
                   </TextInput>

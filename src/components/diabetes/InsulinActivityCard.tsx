@@ -6,8 +6,8 @@ import { useColorScheme } from "nativewind";
 import isDark from "../../util/isDark";
 import BasalIcon from "../../icons/BasalIcon";
 import FastIcon from "../../icons/FastIcon";
-import { useAtom } from "jotai";
-import latestInsulinLogAtom from "../../atoms/latestInsulinLogAtom";
+import { MainRealmContext } from "../../contexts/MainRealmContext";
+import { Insulin } from "../../models/Insulin";
 
 export default function InsulinActivityCard() {
 
@@ -15,9 +15,24 @@ export default function InsulinActivityCard() {
   const { colorScheme: theme } = useColorScheme();
   const darkColors = ["#AEFFE2", "#2BFDB1"];
   const lightColors = ["#009660", "#2BFDB1"];
+  const today = new Date();
+  today.setHours(0);
+  today.setMinutes(0);
+  let tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
 
+
+  const results = MainRealmContext.useQuery(
+    Insulin,
+    (collection) => {
+      return collection
+        .filtered("date <= $0 && date >= $1", tomorrow, today)
+        .sorted("date")
+    }
+  );
   // State
-  const [latestInsulinLog] = useAtom(latestInsulinLogAtom);
+  //
+  const latestInsulinLog = results[results.length - 1] ?? { value: 0, date: new Date(), unit: "Unit", type: "basal" };
 
   return (
     <LinearGradient className="flex flex-row w-full h-12 items-center rounded-md md:rounded-lg md:h-12 lg:h-20 lg:rounded-xl px-2 md:px-3"
@@ -35,7 +50,7 @@ export default function InsulinActivityCard() {
                 <FastIcon isActive={false} class="mr-2"></FastIcon>
             }
             <LexendText class="text-spring-950 text-lg md:text-xl lg:text-3xl">
-              {latestInsulinLog.value}
+              {latestInsulinLog.value.toString()}
             </LexendText>
           </View>
           <Text className="font-lexend text-spring-950 text-xs md:text-md md:mb-1.5 lg:text-xl self-end"

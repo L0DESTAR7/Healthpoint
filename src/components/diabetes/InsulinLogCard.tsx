@@ -10,7 +10,8 @@ import { createRef } from "react";
 import InsulinDateTimePicker from "../InsulinDateTimePicker";
 import insulinDateTimeAtom from "../../atoms/forms/glucose/glucoseDateTimeAtom";
 import InsulinTypeMenu from "./InsulinTypeMenu";
-
+import { MainRealmContext } from "../../contexts/MainRealmContext";
+import { BSON } from "realm";
 
 export default function InsulinLogCard() {
 
@@ -21,10 +22,22 @@ export default function InsulinLogCard() {
   // State 
   const [insulinLog, setInsulinLog] = useAtom(InsulinLogAtom);
   const dateTime = useAtomValue(insulinDateTimeAtom);
+  const realm = MainRealmContext.useRealm();
   const sendInsulinLog = () => {
     setInsulinLog({ value: insulinLog.value, date: dateTime, unit: insulinLog.unit, type: insulinLog.type });
     insulinInput.current?.clear();
     // TODO: Write Insulin Log to the DB
+    realm.write(() => {
+      realm.create("Insulin",
+        {
+          _id: new BSON.ObjectId(),
+          value: insulinLog.value,
+          date: insulinLog.date,
+          type: insulinLog.type,
+          unit: insulinLog.unit,
+        }
+      );
+    })
     console.log(JSON.stringify(insulinLog));
   }
   const insulinInput = createRef<TextInput>();
@@ -53,7 +66,7 @@ export default function InsulinLogCard() {
                     maxLength={3}
                     textAlign="center"
                     ref={insulinInput}
-                    onChangeText={(value: string) => setInsulinLog({ ...insulinLog, value: Number(value) })}
+                    onChangeText={(value: string) => setInsulinLog({ type: insulinLog.type, unit: insulinLog.unit, date: insulinLog.date, value: Number(value) })}
                     className="font-lexend-medium text-spring-800 dark:text-spring-200 md:text-lg lg:text-2xl"
                   >
                   </TextInput>
